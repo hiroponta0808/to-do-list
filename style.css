@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.4rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*form-area*/
+
+.main-title {
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  padding: 30px;
+}
+
+.form-area {
+  width: 600px;
+  /*height: 200px;*/
+  padding: 20px;
+  margin: 0 auto;
+  border: 2px solid;
+
+}
+
+.form-area dl {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.form-area dl dt {
+  width: 20%;
+  text-align: center;
+}
+
+.form-area dl dd {
+  width: 80%;
+  padding: 3px;
+  margin-right: 20px;
+}
+
+.form-area input, .textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.btn-area ul {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.add-btn,.remove-btn {
+  font-size: 1.8rem;
+  width: 80px;
+  padding: 10px;
+}
+
+/*todo-area*/
+.todo-pearent {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.todo-area {
+  padding: 80px 10px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.todo-list {
+  margin: 20px 10px 0;
+  position: relative;
+}
+
+.todo-list-box {
+  border: 1px solid;
+  width: 200px;
+  padding: 10px;
+}
+
+.todo-list-box h2 {
+  font-weight: bold;
+  font-size: 2rem;
+  word-wrap: break-word;
+  padding-bottom: 10px;
+}
+
+.todo-list-box p {
+  font-size: 1.2rem;
+  word-wrap: break-word;
+}
+
+
+.todo-remove-btn {
+  width: 40px;
+  height: 20px;
+  background-color: #ddd;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  /*z-index: -1;*/
+  opacity: .1;
+  user-select: none;
+}
+
+.todo-remove-btn:hover {
+  opacity: 1;
+  /*z-index: 2;*/
+}
