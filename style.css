@@ -73,23 +73,26 @@ a {
 }
 
 .todo-area {
-  padding: 80px 10px;
+  padding: 50px;
+  width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
   display: flex;
   flex-flow: row wrap;
 }
 
 .todo-list {
-  margin: 20px 10px 0;
-  position: relative;
 }
 
 .todo-list-box {
   border: 1px solid;
-  width: 200px;
+  width: 25%;
   padding: 10px;
+  margin: 20px 10px 0;
+  position: relative;
 }
 
-.todo-list-box h2 {
+.todo-area h2 {
   font-weight: bold;
   font-size: 2rem;
   word-wrap: break-word;

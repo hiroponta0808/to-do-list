@@ -5,21 +5,32 @@ var removeBtn = document.getElementById('remove-btn');
 var toDoArea = document.getElementById('todo-area');
 var formArea = document.getElementById('form-area');
 var form = document.forms['todo-form'];
-console.dir(form);
 
 var todoArray = [];
 
 addBtn.addEventListener('click', function() {
-  var title = form.title.value;
-  var content = form.content.value;
+  var titleForm = form.title;
+  // if (title === '') (!title) {
+  //   return false;
+  // }
+  var contentForm = form.content;
+  var id = Math.random();
   var todo = {
-    title: title,
-    content: content,
+    id: id,
+    title: titleForm.value,
+    content: contentForm.value,
   };
+
+  if (!todo.title) {
+    return false;
+  };
+
 
   addTodo(todo);
   saveTodo(todo);
 
+  titleForm.value = '';
+  contentForm.value = '';
 
 });
 
@@ -30,24 +41,31 @@ var addTodo = function(todo) {
   contentTemp.innerHTML = todo.content;
 
   var todoListItem = document.createElement('li');
-  todoListItem.className = 'todo-list';
+  todoListItem.classList.add('todo-list-box');
+
   var todoListItemBtn = document.createElement('button');
-  console.dir(todoListItemBtn);
   todoListItemBtn.className = 'todo-remove-btn';
   todoListItemBtn.id = 'todo-remove-btn';
   todoListItemBtn.innerHTML = '削除';
+  todoListItemBtn.addEventListener('click', function() {
+    toDoArea.removeChild(todoListItem);
+
+    var target = todoArray.find(function(elem) {
+      return elem.id === todo.id;
+    });
+
+    var targetIndex = todoArray.indexOf(target);
+    todoArray.splice(targetIndex, 1);
+    saveLocalStorage(todoArray);
+  });
   todoListItem.appendChild(titleTemp);
   todoListItem.appendChild(contentTemp);
   todoListItem.appendChild(todoListItemBtn);
   toDoArea.appendChild(todoListItem);
-
-  todoListItem.classList.add('todo-list-box');
-
 };
 
 var saveTodo = function(todo) {
   todoArray.push(todo);
-  // console.log(todoArray);
   saveLocalStorage(todoArray);
 };
 
@@ -58,19 +76,53 @@ var saveLocalStorage = function(todos) {
 
 window.addEventListener('load', function() {
   var data = localStorage.getItem('todoItems');
-  data = JSON.parse(data);
-  console.log(data);
-  for (var i = 0; i < data.length; i++) {
-    addTodo(data[i]);
+  if (!data) {//ローカルスオレージにデータが保存されていない場合(nullになっている場合
+    return false;
+  }
+  todoArray = JSON.parse(data);
+  for (var i = 0; i < todoArray.length; i++) {
+    addTodo(todoArray[i]);
   }
 });
 
-removeBtn.addEventListener('click', function(e) {
-  localStorage.clear(e);
-  e.preventDefault();
+removeBtn.addEventListener('click', function() {
+  localStorage.clear();
+  todoArray = [];
+  while (toDoArea.firstChild) {
+    toDoArea.removeChild(toDoArea.firstChild);
+  }
 });
 
 // var todoRemoveBtn = document.getElementById('todo-remove-btn');
 // todoRemoveBtn.addEventListener('click', function() {
 //   localStorage.removeItem('todoItems');
 // });
+
+
+// var text = document.getElementById('text');
+// var sample = document.getElementById('sample-btn');
+//
+// sample.addEventListener('click', function() {
+//   var title = text.innerHTML;
+//   title = '';
+//   text.innerHTML = '';
+//   console.log(title);
+// })
+
+// var apple = {
+//   id: 2,
+//   name: 'りんご',
+// }
+//
+// var fruits = [
+//   {name: 'rinngo', id: 1},
+//   {name: 'budou', id: 2},
+//   {name: 'banana', id:3},
+//   {name: 'mikann', id: 4},
+// ];
+//
+// var result = fruits.find(function(elem) {
+//   return elem.id === apple.id;
+// });
+//
+// console.log(result);
